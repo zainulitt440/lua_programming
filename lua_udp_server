@@ -1,0 +1,16 @@
+#!/usr/local/bin/lua51
+
+local socket = require("socket")
+
+udpp = socket.udp()
+udpp:setsockname("*",1300)
+udpp:settimeout()
+
+--Delete the hyphens of the while and end to run endlessly
+--while true do
+data,ip,port = udpp:receivefrom()
+if data then
+ print("Received: ", string.reverse(data), ip, port)
+ udpp:sendto(data, ip, port)
+end
+--end
